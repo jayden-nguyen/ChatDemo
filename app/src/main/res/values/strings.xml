@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ChatProject</string>
+    <!-- Preferences -->
+    <string name="preference_name">Preference</string>
+    <string name="user_id">User Id</string>
+
+    <string name="my_id"></string>
+</resources>
