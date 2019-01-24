@@ -56,7 +56,7 @@ class ChatAdapter(context: Context): RecyclerView.Adapter<ChatAdapter.ViewHolder
     }
 
     private fun mapToViewType(item: Message): Int {
-        return if (item.userId == mPref.getUserId()) {
+        return if (item.userId == mPref.userId) {
             VIEW_TYPE_MY_CHAT
         } else
             VIEW_TYPE_OTHER_CHAT
