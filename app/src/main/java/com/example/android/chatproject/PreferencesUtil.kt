@@ -2,6 +2,7 @@ package com.example.android.chatproject
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.android.chatproject.util.KeyPreferences
 
 class PreferencesUtil(private val context: Context) {
     private var mPref = context.getSharedPreferences(context.getString(R.string.preference_name),Context.MODE_PRIVATE)
@@ -13,7 +14,7 @@ class PreferencesUtil(private val context: Context) {
     }
 
     var accessToken: String?
-    get() = mPref[KeyPreferences.ACCESS_TOKEN] ?: ""
+    get() = mPref[KeyPreferences.ACCESS_TOKEN]
     set(value) {
         mPref[KeyPreferences.ACCESS_TOKEN] = value
     }
