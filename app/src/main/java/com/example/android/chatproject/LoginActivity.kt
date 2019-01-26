@@ -19,6 +19,8 @@ class LoginActivity: AppCompatActivity() {
         btnLogin.setOnClickListener {
             if (edtUserName.text.isNullOrEmpty() or edtPassword.text.isNullOrEmpty()) {
                 Toast.makeText(this@LoginActivity, "Please fill all the field", Toast.LENGTH_SHORT).show()
+            } else {
+
             }
         }
     }
