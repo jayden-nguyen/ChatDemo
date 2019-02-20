@@ -21,7 +21,7 @@ android {
         }
 
         debug {
-            buildConfigField 'String', 'BASE_URL', '"http://flinkgo.com:8081"'
+            buildConfigField 'String', 'BASE_URL', '"http://flinkgo.com:8080"'
         }
     }
     compileOptions {

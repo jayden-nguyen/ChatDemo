@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginResponseItem(@SerializedName("expireTime") val expireTime: Long,
                              @SerializedName("accessToken") val accessToken: String,
-                             @SerializedName("user") val user: String,
+                             @SerializedName("user") val user: UserInfo,
                              @SerializedName("refreshToken") val refreshToken: String)

@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.example.android.chatproject.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), RoomsAdapter.OnItemRoomClick {
 
     private lateinit var mRoomsAdapter: RoomsAdapter
     private lateinit var mPref: PreferencesUtil
+    private var isCalledApi = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,7 +21,10 @@ class MainActivity : AppCompatActivity(), RoomsAdapter.OnItemRoomClick {
         //
         mPref = PreferencesUtil(this)
         Toast.makeText(this, "AccessToken: ${mPref.accessToken}", Toast.LENGTH_SHORT).show()
-        //Call API
+
+        if (mPref.accessToken == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
         getListRooms()
         setupRecyclerView()
     }
