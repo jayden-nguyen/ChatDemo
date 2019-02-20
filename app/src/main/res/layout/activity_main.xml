@@ -12,32 +12,5 @@
         android:id="@+id/rcvRooms"
         android:visibility="gone"
     />
-    
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:text="LOG OUT"
-        android:textSize="12sp"
-        android:textColor="#fff"
-        android:id="@+id/btnLogout"
-        android:background="#234"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        />
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:text="start Chat"
-        android:textSize="12sp"
-        android:textColor="#fff"
-        android:background="#234"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnLogout"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="10dp"
-        android:id="@+id/btnStartChat"
-        />
 
 </android.support.constraint.ConstraintLayout>

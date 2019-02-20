@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
-import com.example.android.chatproject.R.id.rcvRooms
+import com.example.android.chatproject.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), RoomsAdapter.OnItemRoomClick {
@@ -24,16 +24,6 @@ class MainActivity : AppCompatActivity(), RoomsAdapter.OnItemRoomClick {
 
         if (mPref.accessToken == null) {
             startActivity(Intent(this, LoginActivity::class.java))
-        }
-
-        btnLogout.setOnClickListener {
-            mPref.userId = 0
-            mPref.accessToken = null
-            finish()
-        }
-
-        btnStartChat.setOnClickListener {
-            startActivity(Intent(this, ChatActivity::class.java))
         }
         getListRooms()
         setupRecyclerView()
