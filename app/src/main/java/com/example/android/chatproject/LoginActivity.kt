@@ -27,9 +27,6 @@ class LoginActivity: AppCompatActivity() , MainContract.BaseView{
 
         //
          mPref = PreferencesUtil(this)
-        if (mPref.accessToken != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
 
         btnLogin.setOnClickListener {
             if (edtUserName.text.isNullOrEmpty() or edtPassword.text.isNullOrEmpty()) {

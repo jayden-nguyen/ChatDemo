@@ -7,7 +7,7 @@ import com.example.android.chatproject.util.KeyPreferences
 class PreferencesUtil(private val context: Context) {
     private var mPref = context.getSharedPreferences(context.getString(R.string.preference_name),Context.MODE_PRIVATE)
 
-    var userId: Int?
+    var userId: Int
     get() = mPref[KeyPreferences.USER_ID] ?: 0
     set(value) {
         mPref[KeyPreferences.USER_ID] = value
