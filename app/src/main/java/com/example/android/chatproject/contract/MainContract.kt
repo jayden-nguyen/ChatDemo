@@ -6,7 +6,8 @@ import io.reactivex.Observer
 
 class MainContract {
     interface BasePresenter<V> {
-
+        fun setView(view: V)
+        fun removeView()
     }
 
     interface BaseView {

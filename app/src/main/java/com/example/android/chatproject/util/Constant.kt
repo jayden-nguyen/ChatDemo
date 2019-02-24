@@ -12,4 +12,5 @@ object ResponseCode {
 
 object API{
     const val LOGIN = "login"
+    const val GET_USER_LIST = "user/list"
 }

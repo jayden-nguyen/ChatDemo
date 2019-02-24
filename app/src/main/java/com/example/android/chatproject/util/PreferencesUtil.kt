@@ -1,8 +1,8 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.android.chatproject.util.KeyPreferences
+import com.example.android.chatproject.R
 
 class PreferencesUtil(private val context: Context) {
     private var mPref = context.getSharedPreferences(context.getString(R.string.preference_name),Context.MODE_PRIVATE)

@@ -1,4 +1,4 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.model
 
 import com.google.gson.annotations.SerializedName
 

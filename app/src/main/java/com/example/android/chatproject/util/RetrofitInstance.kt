@@ -1,6 +1,5 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.util
 
-import com.bumptech.glide.load.model.stream.HttpGlideUrlLoader.TIMEOUT
 import com.example.android.chatproject.BuildConfig.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

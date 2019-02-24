@@ -1,4 +1,4 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.view
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.item_my_chat.view.*
-import kotlinx.android.synthetic.main.item_other_chat.view.*
+import com.example.android.chatproject.util.PreferencesUtil
+import com.example.android.chatproject.R
+import com.example.android.chatproject.model.Message
 
 class ChatAdapter(context: Context): RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
     private val mChatDataList: MutableList<Message> = mutableListOf()
@@ -16,8 +17,10 @@ class ChatAdapter(context: Context): RecyclerView.Adapter<ChatAdapter.ViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when(viewType) {
-            VIEW_TYPE_MY_CHAT -> MyChatViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_my_chat, parent, false))
-            VIEW_TYPE_OTHER_CHAT -> OtherChatViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_other_chat, parent, false))
+            VIEW_TYPE_MY_CHAT -> MyChatViewHolder(LayoutInflater.from(parent.context).inflate(
+                R.layout.item_my_chat, parent, false))
+            VIEW_TYPE_OTHER_CHAT -> OtherChatViewHolder(LayoutInflater.from(parent.context).inflate(
+                R.layout.item_other_chat, parent, false))
             else -> throw IllegalStateException("unknown Type $viewType")
         }
     }
