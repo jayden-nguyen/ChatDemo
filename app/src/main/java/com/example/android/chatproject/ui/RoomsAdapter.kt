@@ -1,4 +1,4 @@
-package com.example.android.chatproject.view
+package com.example.android.chatproject.ui
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

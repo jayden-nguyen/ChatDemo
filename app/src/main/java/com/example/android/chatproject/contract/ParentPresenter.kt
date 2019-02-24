@@ -1,5 +1,6 @@
 package com.example.android.chatproject.contract
 
+import com.example.android.chatproject.model.DataManager
 import io.reactivex.disposables.CompositeDisposable
 
 open class ParentPresenter<V>: MainContract.BasePresenter<V>{
