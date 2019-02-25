@@ -21,7 +21,7 @@ class LoginActivity: AppCompatActivity() , MainContract.BaseView{
         setContentView(R.layout.activity_login)
         //Create new Presenter
         if (mPresenter == null) {
-            mPresenter = LoginPresenter.newInstance()
+            mPresenter = LoginPresenter(this)
         }
         if (mPresenter != null) {
             mPresenter!!.setView(this)

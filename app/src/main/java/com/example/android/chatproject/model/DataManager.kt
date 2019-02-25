@@ -1,5 +1,6 @@
 package com.example.android.chatproject.model
 
+import android.content.Context
 import android.util.Log
 import com.example.android.chatproject.util.RetrofitInstance
 import com.example.android.chatproject.model.api.ApiService
@@ -8,9 +9,9 @@ import com.example.android.chatproject.model.response.LoginReponse
 import com.example.android.chatproject.model.response.UserProfileResponse
 import io.reactivex.Observable
 
-class DataManager() {
+class DataManager(private val mContext: Context) {
     private val TAG = DataManager::class.simpleName
-    private var mService = RetrofitInstance.retrofitInstance?.create(ApiService::class.java)
+    private var mService = RetrofitInstance(mContext).retrofitInstance?.create(ApiService::class.java)
     fun login(loginRequest: LoginRequest): Observable<LoginReponse>{
         return mService?.let {
             it.login(loginRequest).map {
@@ -35,13 +36,12 @@ class DataManager() {
                 } else {
                     Log.d(TAG, "ERROR ")
                 }
-
                 body!!
             }
         }!!
     }
     companion object {
         @JvmStatic
-        fun newInstance() = DataManager()
+        fun newInstance(context: Context) = DataManager(context)
     }
 }

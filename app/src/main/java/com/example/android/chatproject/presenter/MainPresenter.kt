@@ -1,6 +1,7 @@
 package com.example.android.chatproject.presenter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import com.example.android.chatproject.contract.MainContract
 import com.example.android.chatproject.contract.ParentPresenter
@@ -10,9 +11,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MainPresenter: ParentPresenter<MainView>() {
+class MainPresenter(context: Context): ParentPresenter<MainView>() {
     private var TAG = MainPresenter::class.simpleName
-    private var mDataManager = DataManager.newInstance()
+    private var mDataManager = DataManager.newInstance(context)
 
     @SuppressLint("CheckResult")
     fun getUserList() {
@@ -20,7 +21,7 @@ class MainPresenter: ParentPresenter<MainView>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                getView()?.renderUserList(it.responseData)
+                getView()?.renderUserList(it.responseData?.users)
             },{
                 Log.d(TAG, "Onrror ${it.message}")
             })
