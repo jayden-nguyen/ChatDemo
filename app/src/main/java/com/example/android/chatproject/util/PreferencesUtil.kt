@@ -1,19 +1,20 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.android.chatproject.R
 
 class PreferencesUtil(private val context: Context) {
     private var mPref = context.getSharedPreferences(context.getString(R.string.preference_name),Context.MODE_PRIVATE)
 
-    var userId: Int?
+    var userId: Int
     get() = mPref[KeyPreferences.USER_ID] ?: 0
     set(value) {
         mPref[KeyPreferences.USER_ID] = value
     }
 
     var accessToken: String?
-    get() = mPref[KeyPreferences.ACCESS_TOKEN] ?: ""
+    get() = mPref[KeyPreferences.ACCESS_TOKEN]
     set(value) {
         mPref[KeyPreferences.ACCESS_TOKEN] = value
     }

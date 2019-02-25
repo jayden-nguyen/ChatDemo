@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:src="@drawable/ic_arrow_back"
+	android:id="@+id/imgBack"
+	/>
     <Button
         android:layout_width="100dp"
         android:layout_height="50dp"
@@ -11,6 +17,12 @@
         android:text="ADD"
         android:textColor="#fff"
         android:id="@+id/btnAddUser"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textTest"
+        android:textSize="15sp"
     />
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
@@ -37,6 +49,7 @@
         <EditText
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:id="@+id/edtMessageContent"
             app:layout_constraintStart_toEndOf="@id/btnAddImage"
             app:layout_constraintEnd_toStartOf="@id/btnSend"
         />
