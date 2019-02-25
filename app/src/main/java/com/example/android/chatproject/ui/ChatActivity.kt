@@ -1,4 +1,4 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.TextView
+import com.example.android.chatproject.util.PreferencesUtil
+import com.example.android.chatproject.R
+import com.example.android.chatproject.model.Message
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -40,13 +43,14 @@ class ChatActivity: AppCompatActivity() {
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun setupStompClient() {
         mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://flinkgo.com:8081/websocket?auth=${mPref.accessToken}")
         mStompClient.withClientHeartbeat(10000).withServerHeartbeat(10000)
         mStompClient.connect()
             mStompClient.topic("/topic/greetings").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe({
-                    mChatAdapter.addItem(Message(0,"Me",it.payload))
+                    mChatAdapter.addItem(Message(0, "Me", it.payload))
                     rcvChat.smoothScrollToPosition(mChatAdapter.itemCount)
             },{
                 Log.d("testStompMessage","onERROR ${it.message}")

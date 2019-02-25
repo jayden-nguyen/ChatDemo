@@ -1,9 +1,11 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.ui
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.android.chatproject.R
+import com.example.android.chatproject.model.RoomData
 import kotlinx.android.synthetic.main.item_room.view.*
 
 class RoomsAdapter: RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {

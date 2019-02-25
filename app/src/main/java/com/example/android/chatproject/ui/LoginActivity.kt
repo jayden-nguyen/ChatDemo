@@ -1,9 +1,11 @@
-package com.example.android.chatproject
+package com.example.android.chatproject.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.example.android.chatproject.util.PreferencesUtil
+import com.example.android.chatproject.R
 import com.example.android.chatproject.contract.MainContract
 import com.example.android.chatproject.model.request.LoginRequest
 import com.example.android.chatproject.model.response.LoginResponseItem
