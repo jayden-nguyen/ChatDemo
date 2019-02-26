@@ -14,3 +14,7 @@ object API{
     const val LOGIN = "login"
     const val GET_USER_LIST = "user/list"
 }
+
+object DateFormat {
+    const val BIRTHDAY_FORMAT = "YYYY-MM-dd"
+}

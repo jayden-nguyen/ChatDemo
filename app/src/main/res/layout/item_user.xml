@@ -13,7 +13,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_editor_absoluteX="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textSize="20sp"
@@ -34,6 +35,16 @@
         android:layout_marginBottom="2dp"
         />
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="13sp"
+        android:textColor="#000"
+        android:id="@+id/tvBirthday"
+        android:layout_marginEnd="20dp"
+        />
 
 </android.support.constraint.ConstraintLayout>
