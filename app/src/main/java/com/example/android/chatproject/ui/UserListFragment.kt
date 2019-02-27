@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.android.chatproject.R
 import com.example.android.chatproject.model.response.LoginResponseItem
+import com.example.android.chatproject.model.response.RoomData
 import com.example.android.chatproject.model.response.UserProfileItem
 import com.example.android.chatproject.presenter.MainPresenter
 import com.example.android.chatproject.view.MainView
@@ -24,11 +25,7 @@ class UserListFragment: Fragment() , MainView{
         }
     }
 
-    override fun renderRoomList() {
-
-    }
-
-    override fun renderLoginResult(item: LoginResponseItem?) {
+    override fun renderRoomList(roomList: ArrayList<RoomData>?) {
 
     }
 

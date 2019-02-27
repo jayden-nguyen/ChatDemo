@@ -13,6 +13,7 @@ object ResponseCode {
 object API{
     const val LOGIN = "login"
     const val GET_USER_LIST = "user/list"
+    const val GET_CHAT_ROOMS = "room"
 }
 
 object DateFormat {

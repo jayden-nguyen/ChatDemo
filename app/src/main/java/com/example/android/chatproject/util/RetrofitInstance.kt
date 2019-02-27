@@ -3,6 +3,7 @@ package com.example.android.chatproject.util
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.android.chatproject.BuildConfig.BASE_URL
+import com.example.android.chatproject.BuildConfig.SOCKET_HOST_API
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitInstance(private val context: Context){
     private var retrofit: Retrofit? = null
+    private var socketHost: Retrofit? = null
     private var mPref = PreferencesUtil(context)
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor {
@@ -33,6 +35,20 @@ class RetrofitInstance(private val context: Context){
         }
 
         return retrofit
+    }
+
+    val socketHostInstance: Retrofit?
+    get() {
+        if (socketHost == null) {
+            socketHost = Retrofit.Builder()
+                .client(okHttpClient)
+                .baseUrl(SOCKET_HOST_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+        }
+
+        return socketHost
     }
 
 

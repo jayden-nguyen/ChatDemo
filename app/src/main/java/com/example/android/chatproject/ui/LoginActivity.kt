@@ -10,9 +10,10 @@ import com.example.android.chatproject.contract.MainContract
 import com.example.android.chatproject.model.request.LoginRequest
 import com.example.android.chatproject.model.response.LoginResponseItem
 import com.example.android.chatproject.presenter.LoginPresenter
+import com.example.android.chatproject.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity: AppCompatActivity() , MainContract.BaseView{
+class LoginActivity: AppCompatActivity() , LoginView{
 
     private var mPresenter: LoginPresenter? = null
     lateinit var mPref: PreferencesUtil

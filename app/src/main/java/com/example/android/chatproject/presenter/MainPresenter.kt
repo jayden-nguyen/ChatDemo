@@ -26,4 +26,16 @@ class MainPresenter(context: Context): ParentPresenter<MainView>() {
                 Log.d(TAG, "Onrror ${it.message}")
             })
     }
+
+    @SuppressLint("CheckResult")
+    fun getRooms(page: Int = 0, size: Int = 0) {
+        mDataManager.getRooms(page, size)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                getView()?.renderRoomList(it.responseData?.room)
+            }, {
+                Log.d(TAG, "Onrror ${it.message}")
+            })
+    }
 }

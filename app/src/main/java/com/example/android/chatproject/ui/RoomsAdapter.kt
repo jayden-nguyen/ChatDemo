@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.chatproject.R
-import com.example.android.chatproject.model.RoomData
+import com.example.android.chatproject.model.response.RoomData
+import com.example.android.chatproject.util.PreferencesUtil
 import kotlinx.android.synthetic.main.item_room.view.*
 
-class RoomsAdapter: RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
+class RoomsAdapter(val mPref: PreferencesUtil): RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
     private var mDataRoom: MutableList<RoomData> = mutableListOf()
     private var mListener: OnItemRoomClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
@@ -21,15 +22,14 @@ class RoomsAdapter: RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        holder.mTvUserName.text = mDataRoom[position].messages[0].userName
-        holder.mTvMessage.text = mDataRoom[position].messages[0].message
+        holder.mTvUserName.text = mDataRoom[position].userIds.checkNotMe()
 
         holder.itemView.setOnClickListener {
             mListener?.onItemRoomClick(position)
         }
     }
 
-    fun setData(list: List<RoomData>) {
+    fun setData(list: ArrayList<RoomData>) {
         mDataRoom.addAll(list)
         notifyDataSetChanged()
     }
@@ -50,6 +50,16 @@ class RoomsAdapter: RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
 
     interface OnItemRoomClick{
         fun onItemRoomClick(position: Int)
+    }
+
+    fun ArrayList<Int>.checkNotMe(): String {
+        var result = ""
+        for (item in this) {
+            if (item != mPref.userId)
+                result = item.toString()
+        }
+
+        return result
     }
 
 }

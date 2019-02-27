@@ -6,12 +6,14 @@ import com.example.android.chatproject.util.RetrofitInstance
 import com.example.android.chatproject.model.api.ApiService
 import com.example.android.chatproject.model.request.LoginRequest
 import com.example.android.chatproject.model.response.LoginReponse
+import com.example.android.chatproject.model.response.RoomResponse
 import com.example.android.chatproject.model.response.UserProfileResponse
 import io.reactivex.Observable
 
 class DataManager(private val mContext: Context) {
     private val TAG = DataManager::class.simpleName
     private var mService = RetrofitInstance(mContext).retrofitInstance?.create(ApiService::class.java)
+    private var mServiceSocket = RetrofitInstance(mContext).socketHostInstance?.create(ApiService::class.java)
     fun login(loginRequest: LoginRequest): Observable<LoginReponse>{
         return mService?.let {
             it.login(loginRequest).map {
@@ -40,6 +42,21 @@ class DataManager(private val mContext: Context) {
             }
         }!!
     }
+
+    fun getRooms(page:Int, size:Int): Observable<RoomResponse> {
+        return mServiceSocket?.let {
+            it.getChatRooms(page, size).map {
+                var body: RoomResponse? = null
+                if (it.response()!!.isSuccessful) {
+                    body = it.response()!!.body()
+                } else {
+                    Log.d(TAG, "ERROR ")
+                }
+                body!!
+            }
+        }!!
+    }
+
     companion object {
         @JvmStatic
         fun newInstance(context: Context) = DataManager(context)
