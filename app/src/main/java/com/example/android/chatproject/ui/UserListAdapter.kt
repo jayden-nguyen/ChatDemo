@@ -26,7 +26,6 @@ class UserListAdapter(val onClick: () -> Unit): RecyclerView.Adapter<UserListAda
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mUserList[position])
-        holder.itemView.setOnClickListener{onClick}
     }
 
     fun addUserList(list: ArrayList<UserProfileItem>) {
@@ -48,6 +47,9 @@ class UserListAdapter(val onClick: () -> Unit): RecyclerView.Adapter<UserListAda
             mTvUserName.text = userProfileItem.userName
             mTvGender.text = userProfileItem.userInfo.gender
             mTvBirthday.text = Date(userProfileItem.userInfo.dob).convertToString()
+            itemView.setOnClickListener {
+                onClick()
+            }
         }
     }
 }

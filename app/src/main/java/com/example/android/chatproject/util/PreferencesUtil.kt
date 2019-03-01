@@ -3,20 +3,36 @@ package com.example.android.chatproject.util
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.android.chatproject.R
+import com.example.android.chatproject.util.KeyPreferences.ACCESS_TOKEN
+import com.example.android.chatproject.util.KeyPreferences.EXPIRED_TIME
+import com.example.android.chatproject.util.KeyPreferences.REFRESH_TOKEN
+import com.example.android.chatproject.util.KeyPreferences.USER_ID
 
 class PreferencesUtil(private val context: Context) {
     private var mPref = context.getSharedPreferences(context.getString(R.string.preference_name),Context.MODE_PRIVATE)
 
     var userId: Int
-    get() = mPref[KeyPreferences.USER_ID] ?: 0
+    get() = mPref[USER_ID] ?: 0
     set(value) {
-        mPref[KeyPreferences.USER_ID] = value
+        mPref[USER_ID] = value
     }
 
     var accessToken: String?
-    get() = mPref[KeyPreferences.ACCESS_TOKEN]
+    get() = mPref[ACCESS_TOKEN]
     set(value) {
-        mPref[KeyPreferences.ACCESS_TOKEN] = value
+        mPref[ACCESS_TOKEN] = value
+    }
+
+    var refreshToken: String?
+    get() = mPref[REFRESH_TOKEN]
+    set(value) {
+        mPref[REFRESH_TOKEN] = value
+    }
+
+    var expiredTime: Long?
+    get() = mPref[EXPIRED_TIME]
+    set(value) {
+        mPref[EXPIRED_TIME] = value
     }
 }
 

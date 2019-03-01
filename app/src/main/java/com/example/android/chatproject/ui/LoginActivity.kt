@@ -43,6 +43,9 @@ class LoginActivity: AppCompatActivity() , LoginView{
     override fun renderLoginResult(item: LoginResponseItem?) {
         Toast.makeText(this@LoginActivity, "Success ${item?.user}", Toast.LENGTH_SHORT).show()
         mPref.accessToken = item?.accessToken
+        mPref.refreshToken = item?.refreshToken
+        mPref.expiredTime = item?.expireTime
+        mPref.userId = item?.user!!.userId
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
     }
 

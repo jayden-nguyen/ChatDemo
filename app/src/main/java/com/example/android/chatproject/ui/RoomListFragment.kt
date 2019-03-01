@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.chatproject.R
+import com.example.android.chatproject.model.response.CreateRoomData
 import com.example.android.chatproject.model.response.LoginResponseItem
 import com.example.android.chatproject.model.response.RoomData
 import com.example.android.chatproject.model.response.UserProfileItem
@@ -17,6 +18,7 @@ import com.example.android.chatproject.view.MainView
 import kotlinx.android.synthetic.main.fragment_room_list.*
 
 class RoomListFragment: Fragment(), MainView {
+
     private val TAG = RoomListFragment::class.simpleName
     private var mPresenter: MainPresenter? = null
     private lateinit var mAdapter: RoomsAdapter
@@ -56,6 +58,14 @@ class RoomListFragment: Fragment(), MainView {
         if (roomList != null) {
             mAdapter.setData(roomList)
         }
+    }
+
+    override fun renderCreateRoom(createRoomData: CreateRoomData?) {
+
+    }
+
+    override fun renderRefreshToken(accessToken: String?) {
+
     }
 
     override fun onDestroy() {

@@ -6,22 +6,34 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.android.chatproject.util.PreferencesUtil
 import com.example.android.chatproject.R
+import com.example.android.chatproject.model.response.CreateRoomData
+import com.example.android.chatproject.model.response.RoomData
+import com.example.android.chatproject.model.response.UserProfileItem
+import com.example.android.chatproject.presenter.MainPresenter
+import com.example.android.chatproject.view.MainView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var mPref: PreferencesUtil
+class MainActivity : AppCompatActivity() , MainView{
+
     private lateinit var mPagerAdapter: MainAdapter
     private var isCalledApi = true
+    private lateinit var mPref: PreferencesUtil
+    private var mPresenter: MainPresenter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupViewPager()
-        //
         mPref = PreferencesUtil(this)
-        Toast.makeText(this, "AccessToken: ${mPref.accessToken}", Toast.LENGTH_SHORT).show()
+        setupViewPager()
+        if (mPresenter == null) {
+            mPresenter = MainPresenter(this)
+            mPresenter?.setView(this)
+        }
+        checkExpiredTime()
+    }
 
-        if (mPref.accessToken == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
+    private fun checkExpiredTime() {
+        if (System.currentTimeMillis() > mPref.expiredTime!!) {
+            mPresenter?.refreshToken()
         }
     }
 
@@ -31,5 +43,26 @@ class MainActivity : AppCompatActivity() {
         mPagerAdapter.addFragment(UserListFragment.newInstance())
         mainViewPager.adapter = mPagerAdapter
         mainTabs.setupWithViewPager(mainViewPager)
+    }
+
+    override fun renderUserList(userList: ArrayList<UserProfileItem>?) {
+
+    }
+
+    override fun renderRoomList(roomList: ArrayList<RoomData>?) {
+
+    }
+
+    override fun renderCreateRoom(createRoomData: CreateRoomData?) {
+
+    }
+
+    override fun renderRefreshToken(accessToken: String?) {
+        mPref.accessToken = accessToken
+    }
+
+    override fun onDestroy() {
+        mPresenter?.removeView()
+        super.onDestroy()
     }
 }

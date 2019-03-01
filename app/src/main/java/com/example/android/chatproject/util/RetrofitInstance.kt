@@ -13,12 +13,22 @@ import java.util.concurrent.TimeUnit
 class RetrofitInstance(private val context: Context){
     private var retrofit: Retrofit? = null
     private var socketHost: Retrofit? = null
+    private var refreshHost: Retrofit? = null
     private var mPref = PreferencesUtil(context)
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor {
             it.proceed(it.request().newBuilder()
                 .addHeader("Content-Type","application/json")
                 .addHeader("Authorization", "Bearer " + mPref.accessToken).build())
+        }
+        .connectTimeout(60L, TimeUnit.SECONDS)
+        .readTimeout(60L, TimeUnit.SECONDS)
+        .build()!!
+
+    private val refreshTokenClient = OkHttpClient.Builder()
+        .addInterceptor {
+            it.proceed(it.request().newBuilder()
+                .addHeader("Authorization", "Refresh " + mPref.refreshToken).build())
         }
         .connectTimeout(60L, TimeUnit.SECONDS)
         .readTimeout(60L, TimeUnit.SECONDS)
@@ -37,6 +47,8 @@ class RetrofitInstance(private val context: Context){
         return retrofit
     }
 
+
+
     val socketHostInstance: Retrofit?
     get() {
         if (socketHost == null) {
@@ -49,6 +61,20 @@ class RetrofitInstance(private val context: Context){
         }
 
         return socketHost
+    }
+
+    val refreshInstance: Retrofit?
+    get() {
+        if (refreshHost == null) {
+            refreshHost = Retrofit.Builder()
+                .client(refreshTokenClient)
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+        }
+
+        return refreshHost
     }
 
 

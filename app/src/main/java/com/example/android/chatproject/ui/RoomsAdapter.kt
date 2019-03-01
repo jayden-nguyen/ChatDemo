@@ -22,7 +22,7 @@ class RoomsAdapter(val mPref: PreferencesUtil): RecyclerView.Adapter<RoomsAdapte
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        holder.mTvUserName.text = mDataRoom[position].userIds.checkNotMe()
+        holder.mTvName.text = mDataRoom[position].name
 
         holder.itemView.setOnClickListener {
             mListener?.onItemRoomClick(position)
@@ -44,7 +44,7 @@ class RoomsAdapter(val mPref: PreferencesUtil): RecyclerView.Adapter<RoomsAdapte
     }
 
     inner class RoomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var mTvUserName = itemView.tvUserName
+        var mTvName = itemView.tvName
         var mTvMessage = itemView.tvLatestMessage
     }
 

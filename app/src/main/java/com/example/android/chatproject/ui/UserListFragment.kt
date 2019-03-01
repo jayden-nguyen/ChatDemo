@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.android.chatproject.R
+import com.example.android.chatproject.model.response.CreateRoomData
 import com.example.android.chatproject.model.response.LoginResponseItem
 import com.example.android.chatproject.model.response.RoomData
 import com.example.android.chatproject.model.response.UserProfileItem
@@ -28,6 +29,15 @@ class UserListFragment: Fragment() , MainView{
     override fun renderRoomList(roomList: ArrayList<RoomData>?) {
 
     }
+
+    override fun renderCreateRoom(createRoomData: CreateRoomData?) {
+
+    }
+
+    override fun renderRefreshToken(accessToken: String?) {
+
+    }
+
 
     private var mPresenter:MainPresenter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +59,7 @@ class UserListFragment: Fragment() , MainView{
 
     private fun setupRecyclerView() {
         rcvUsers.apply {
-            mAdapter = UserListAdapter {
-                Toast.makeText(context, "Open chat", Toast.LENGTH_SHORT).show()
-            }
+            mAdapter = UserListAdapter (onClick = {run{Toast.makeText(context, "Open chat", Toast.LENGTH_SHORT).show()}})
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
         }
