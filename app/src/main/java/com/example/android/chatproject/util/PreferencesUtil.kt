@@ -7,6 +7,7 @@ import com.example.android.chatproject.util.KeyPreferences.ACCESS_TOKEN
 import com.example.android.chatproject.util.KeyPreferences.EXPIRED_TIME
 import com.example.android.chatproject.util.KeyPreferences.REFRESH_TOKEN
 import com.example.android.chatproject.util.KeyPreferences.USER_ID
+import com.example.android.chatproject.util.KeyPreferences.USER_NAME
 
 class PreferencesUtil(private val context: Context) {
     private var mPref = context.getSharedPreferences(context.getString(R.string.preference_name),Context.MODE_PRIVATE)
@@ -15,6 +16,12 @@ class PreferencesUtil(private val context: Context) {
     get() = mPref[USER_ID] ?: 0
     set(value) {
         mPref[USER_ID] = value
+    }
+
+    var userName: String
+    get() = mPref[USER_NAME] ?: ""
+    set(value) {
+        mPref[USER_NAME] = value
     }
 
     var accessToken: String?

@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.android.chatproject.R
 import com.example.android.chatproject.model.response.UserProfileItem
+import com.example.android.chatproject.util.PreferencesUtil
 import com.example.android.chatproject.util.convertToString
 import kotlinx.android.synthetic.main.item_user.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class UserListAdapter(val onClick: () -> Unit): RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
+class UserListAdapter(val mPref: PreferencesUtil, val onClick: (userIds: List<Int>, name: String) -> Unit): RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
     private val mUserList = ArrayList<UserProfileItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,7 +49,8 @@ class UserListAdapter(val onClick: () -> Unit): RecyclerView.Adapter<UserListAda
             mTvGender.text = userProfileItem.userInfo.gender
             mTvBirthday.text = Date(userProfileItem.userInfo.dob).convertToString()
             itemView.setOnClickListener {
-                onClick()
+                val userIds = mutableListOf<Int>(mPref.userId, userProfileItem.userInfo.userId)
+                onClick(userIds, userProfileItem.userName)
             }
         }
     }

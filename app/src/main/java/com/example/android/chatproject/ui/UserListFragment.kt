@@ -1,5 +1,6 @@
 package com.example.android.chatproject.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -9,17 +10,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.android.chatproject.R
+import com.example.android.chatproject.model.request.CreateRoomRequest
 import com.example.android.chatproject.model.response.CreateRoomData
 import com.example.android.chatproject.model.response.LoginResponseItem
 import com.example.android.chatproject.model.response.RoomData
 import com.example.android.chatproject.model.response.UserProfileItem
 import com.example.android.chatproject.presenter.MainPresenter
+import com.example.android.chatproject.util.PreferencesUtil
+import com.example.android.chatproject.util.RoomKey.ROOM_ID
+import com.example.android.chatproject.util.RoomKey.ROOM_NAME
+import com.example.android.chatproject.util.RoomKey.ROOM_USER_LIST
 import com.example.android.chatproject.view.MainView
 import kotlinx.android.synthetic.main.fragment_user_list.*
 
 class UserListFragment: Fragment() , MainView{
     private val TAG = UserListFragment::class.simpleName
     private lateinit var mAdapter: UserListAdapter
+    private lateinit var mPref: PreferencesUtil
     override fun renderUserList(userList: ArrayList<UserProfileItem>?) {
         if (userList != null) {
             mAdapter.addUserList(userList)
@@ -31,7 +38,14 @@ class UserListFragment: Fragment() , MainView{
     }
 
     override fun renderCreateRoom(createRoomData: CreateRoomData?) {
-
+        val id = createRoomData?.id
+        val userIds = createRoomData?.userIds
+        val name = createRoomData?.name
+        startActivity(Intent(context, ChatActivity::class.java).apply {
+            putExtra(ROOM_ID, id)
+            putExtra(ROOM_USER_LIST, userIds)
+            putExtra(ROOM_NAME, name)
+        })
     }
 
     override fun renderRefreshToken(accessToken: String?) {
@@ -46,6 +60,7 @@ class UserListFragment: Fragment() , MainView{
             mPresenter = context?.let { MainPresenter(it) }
             mPresenter?.setView(this)
         }
+        mPref = PreferencesUtil(context!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,10 +74,17 @@ class UserListFragment: Fragment() , MainView{
 
     private fun setupRecyclerView() {
         rcvUsers.apply {
-            mAdapter = UserListAdapter (onClick = {run{Toast.makeText(context, "Open chat", Toast.LENGTH_SHORT).show()}})
+            mAdapter = UserListAdapter (mPref,onClick = {
+                userIds,name ->
+                onClicked(userIds, name)
+            })
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
         }
+    }
+
+    private fun onClicked(userIds: List<Int>, name: String) {
+        mPresenter?.createRoom(CreateRoomRequest(userIds, name))
     }
 
     override fun onDestroy() {

@@ -5,6 +5,7 @@ object KeyPreferences {
     const val ACCESS_TOKEN = "access_token"
     const val REFRESH_TOKEN = "refresh_token"
     const val EXPIRED_TIME = "expire_time"
+    const val USER_NAME = "user_name"
 }
 
 object ResponseCode {
@@ -18,6 +19,12 @@ object API{
     const val GET_CHAT_ROOMS = "room"
     const val CREATE_ROOM = "room"
     const val REFRESH_TOKEN = "auth"
+}
+
+object RoomKey {
+    const val ROOM_ID = "room_id"
+    const val ROOM_USER_LIST = "room_userids"
+    const val ROOM_NAME = "room_name"
 }
 
 object DateFormat {

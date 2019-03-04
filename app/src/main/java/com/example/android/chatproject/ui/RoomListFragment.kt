@@ -1,5 +1,6 @@
 package com.example.android.chatproject.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -8,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.chatproject.R
+import com.example.android.chatproject.model.request.CreateRoomRequest
 import com.example.android.chatproject.model.response.CreateRoomData
 import com.example.android.chatproject.model.response.LoginResponseItem
 import com.example.android.chatproject.model.response.RoomData
 import com.example.android.chatproject.model.response.UserProfileItem
 import com.example.android.chatproject.presenter.MainPresenter
 import com.example.android.chatproject.util.PreferencesUtil
+import com.example.android.chatproject.util.RoomKey
 import com.example.android.chatproject.view.MainView
 import kotlinx.android.synthetic.main.fragment_room_list.*
 
@@ -44,7 +47,10 @@ class RoomListFragment: Fragment(), MainView {
 
     private fun setupRecyclerView() {
         rcvRooms.apply {
-            mAdapter = RoomsAdapter(mPref)
+            mAdapter = RoomsAdapter(mPref, onItemRoomClick = {
+                userIds, name ->
+                onItemClicked(userIds, name)
+            })
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
         }
@@ -61,7 +67,14 @@ class RoomListFragment: Fragment(), MainView {
     }
 
     override fun renderCreateRoom(createRoomData: CreateRoomData?) {
-
+        val id = createRoomData?.id
+        val userIds = createRoomData?.userIds
+        val name = createRoomData?.name
+        startActivity(Intent(context, ChatActivity::class.java).apply {
+            putExtra(RoomKey.ROOM_ID, id)
+            putIntegerArrayListExtra(RoomKey.ROOM_USER_LIST, userIds)
+            putExtra(RoomKey.ROOM_NAME, name)
+        })
     }
 
     override fun renderRefreshToken(accessToken: String?) {
@@ -71,6 +84,10 @@ class RoomListFragment: Fragment(), MainView {
     override fun onDestroy() {
         mPresenter?.removeView()
         super.onDestroy()
+    }
+
+    fun onItemClicked(userIds: List<Int>, name: String) {
+        mPresenter?.createRoom(CreateRoomRequest(userIds, name))
     }
 
     companion object {

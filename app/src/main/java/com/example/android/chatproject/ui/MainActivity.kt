@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() , MainView{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mPref = PreferencesUtil(this)
-        setupViewPager()
         if (mPresenter == null) {
             mPresenter = MainPresenter(this)
             mPresenter?.setView(this)
@@ -34,6 +33,8 @@ class MainActivity : AppCompatActivity() , MainView{
     private fun checkExpiredTime() {
         if (System.currentTimeMillis() > mPref.expiredTime!!) {
             mPresenter?.refreshToken()
+        } else {
+            setupViewPager()
         }
     }
 
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() , MainView{
 
     override fun renderRefreshToken(accessToken: String?) {
         mPref.accessToken = accessToken
+        setupViewPager()
     }
 
     override fun onDestroy() {

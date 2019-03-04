@@ -46,6 +46,7 @@ class LoginActivity: AppCompatActivity() , LoginView{
         mPref.refreshToken = item?.refreshToken
         mPref.expiredTime = item?.expireTime
         mPref.userId = item?.user!!.userId
+        mPref.userName = item?.user!!.userName
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
     }
 

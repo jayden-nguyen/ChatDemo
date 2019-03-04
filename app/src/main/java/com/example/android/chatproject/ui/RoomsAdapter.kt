@@ -9,9 +9,8 @@ import com.example.android.chatproject.model.response.RoomData
 import com.example.android.chatproject.util.PreferencesUtil
 import kotlinx.android.synthetic.main.item_room.view.*
 
-class RoomsAdapter(val mPref: PreferencesUtil): RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
+class RoomsAdapter(val mPref: PreferencesUtil, var onItemRoomClick: (listUserId: ArrayList<Int>, roomName: String) -> Unit): RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
     private var mDataRoom: MutableList<RoomData> = mutableListOf()
-    private var mListener: OnItemRoomClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_room, parent, false)
         return RoomViewHolder(view)
@@ -22,10 +21,11 @@ class RoomsAdapter(val mPref: PreferencesUtil): RecyclerView.Adapter<RoomsAdapte
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        holder.mTvName.text = mDataRoom[position].name
+        val roomData = mDataRoom[position]
+        holder.mTvName.text = roomData.name
 
         holder.itemView.setOnClickListener {
-            mListener?.onItemRoomClick(position)
+            onItemRoomClick(roomData.userIds, roomData.name)
         }
     }
 
@@ -39,17 +39,10 @@ class RoomsAdapter(val mPref: PreferencesUtil): RecyclerView.Adapter<RoomsAdapte
         notifyDataSetChanged()
     }
 
-    fun setRoomListener(listener: OnItemRoomClick) {
-        mListener = listener
-    }
 
     inner class RoomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var mTvName = itemView.tvName
         var mTvMessage = itemView.tvLatestMessage
-    }
-
-    interface OnItemRoomClick{
-        fun onItemRoomClick(position: Int)
     }
 
     fun ArrayList<Int>.checkNotMe(): String {
