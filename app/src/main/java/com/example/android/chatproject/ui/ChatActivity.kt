@@ -64,8 +64,17 @@ class ChatActivity: AppCompatActivity() {
         mStompClient.connect()
             mStompClient.topic("/user/queue/reply").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe({
-                    mChatAdapter.addItem(Message(0, "Me", it.payload))
-                    rcvChat.smoothScrollToPosition(mChatAdapter.itemCount)
+                    try {
+                        val data = JSONObject(it.payload)
+                        val userId = data.getInt("fromUserId")
+                        val message = data.getString("message")
+                        val userName = data.getString("fromUserName")
+                        Log.d(TAG, "PayLoad is ${it.payload}")
+                        mChatAdapter.addItem(Message(userId, userName, message))
+                        rcvChat.smoothScrollToPosition(mChatAdapter.itemCount)
+                    } catch (e: Throwable) {
+                        Log.e(TAG, "${e.message}")
+                    }
             },{
                 Log.d("testStompMessage","onERROR ${it.message}")
             })
@@ -78,6 +87,7 @@ class ChatActivity: AppCompatActivity() {
             smoothScrollToPosition(mChatAdapter.itemCount)
         }
     }
+
 
     override fun onDestroy() {
         mCompositeDisposable.dispose()

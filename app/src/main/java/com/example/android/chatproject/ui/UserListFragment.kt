@@ -44,7 +44,6 @@ class UserListFragment: Fragment() , MainView{
         startActivity(Intent(context, ChatActivity::class.java).apply {
             putExtra(ROOM_ID, id)
             putExtra(ROOM_USER_LIST, userIds)
-            putExtra(ROOM_NAME, name)
         })
     }
 

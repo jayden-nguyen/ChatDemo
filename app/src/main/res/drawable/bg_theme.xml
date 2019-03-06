@@ -4,8 +4,6 @@
     >
 
     <solid
-        android:color="#fff"
-
-/>
+        android:color="#fff"/>
 
 </shape>

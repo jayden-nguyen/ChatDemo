@@ -25,6 +25,7 @@ object RoomKey {
     const val ROOM_ID = "room_id"
     const val ROOM_USER_LIST = "room_userids"
     const val ROOM_NAME = "room_name"
+    const val ROOM_PARTNER_NAME = "room_partner_name"
 }
 
 object DateFormat {
