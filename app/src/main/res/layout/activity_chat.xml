@@ -2,35 +2,52 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ImageView
-	android:layout_width="50dp"
-	android:layout_height="50dp"
-	android:src="@drawable/ic_arrow_back"
-	android:id="@+id/imgBack"
-	/>
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/colorPrimaryDark"
-        android:text="ADD"
-        android:textColor="#fff"
-        android:id="@+id/btnAddUser"
-    />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textTest"
-        android:textSize="15sp"
-    />
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+   <android.support.constraint.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="54dp"
+       android:id="@+id/layoutHeader"
+       >
+       <ImageView
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:src="@drawable/ic_arrow_back"
+           android:id="@+id/imgBack"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/tvPartnerName"
+           android:textSize="20sp"
+           app:layout_constraintStart_toEndOf="@id/imgBack"
+           app:layout_constraintEnd_toStartOf="@id/imgPlusMember"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           android:textStyle="bold"
+           android:textColor="@color/colorBlack"
+           tools:text="this is test"
+           />
+       <ImageView
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           android:src="@drawable/plus_icon"
+           android:layout_marginEnd="5dp"
+           app:layout_constraintTop_toTopOf="parent"
+           android:id="@+id/imgPlusMember"
+           app:layout_constraintBottom_toBottomOf="parent"
+           />
+   </android.support.constraint.ConstraintLayout>
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/rcvChat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddUser"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader"
         app:layout_constraintBottom_toTopOf="@id/sendLayout"
     />
     <android.support.constraint.ConstraintLayout

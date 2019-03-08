@@ -10,9 +10,10 @@ import com.example.android.chatproject.contract.MainContract
 import com.example.android.chatproject.model.request.LoginRequest
 import com.example.android.chatproject.model.response.LoginResponseItem
 import com.example.android.chatproject.presenter.LoginPresenter
+import com.example.android.chatproject.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity: AppCompatActivity() , MainContract.BaseView{
+class LoginActivity: AppCompatActivity() , LoginView{
 
     private var mPresenter: LoginPresenter? = null
     lateinit var mPref: PreferencesUtil
@@ -21,7 +22,7 @@ class LoginActivity: AppCompatActivity() , MainContract.BaseView{
         setContentView(R.layout.activity_login)
         //Create new Presenter
         if (mPresenter == null) {
-            mPresenter = LoginPresenter.newInstance()
+            mPresenter = LoginPresenter(this)
         }
         if (mPresenter != null) {
             mPresenter!!.setView(this)
@@ -42,7 +43,12 @@ class LoginActivity: AppCompatActivity() , MainContract.BaseView{
     override fun renderLoginResult(item: LoginResponseItem?) {
         Toast.makeText(this@LoginActivity, "Success ${item?.user}", Toast.LENGTH_SHORT).show()
         mPref.accessToken = item?.accessToken
+        mPref.refreshToken = item?.refreshToken
+        mPref.expiredTime = item?.expireTime
+        mPref.userId = item?.user!!.userId
+        mPref.userName = item?.user!!.userName
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
     override fun onDestroy() {

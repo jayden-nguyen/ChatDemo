@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvUserName"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="10dp"
     />
 
     <TextView
@@ -19,6 +19,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="300dp"
         android:id="@+id/tvChatItem"
         android:textColor="#fff"
         android:background="@drawable/baloon_right"

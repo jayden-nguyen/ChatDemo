@@ -1,18 +1,20 @@
 package com.example.android.chatproject.presenter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import com.example.android.chatproject.contract.MainContract
 import com.example.android.chatproject.contract.ParentPresenter
 import com.example.android.chatproject.model.DataManager
 import com.example.android.chatproject.model.request.LoginRequest
+import com.example.android.chatproject.view.LoginView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LoginPresenter:ParentPresenter<MainContract.BaseView>() {
+class LoginPresenter(context: Context):ParentPresenter<LoginView>() {
 
-    private var mDataManager = DataManager.newInstance()
+    private var mDataManager = DataManager.newInstance(context)
     private var TAG = LoginPresenter::class.simpleName
 
     @SuppressLint("CheckResult")
@@ -26,13 +28,4 @@ class LoginPresenter:ParentPresenter<MainContract.BaseView>() {
                Log.d(TAG, "Error ${it.message}")
            })
     }
-
-
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = LoginPresenter()
-    }
-
 }

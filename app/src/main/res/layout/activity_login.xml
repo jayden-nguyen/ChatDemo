@@ -5,6 +5,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="@color/colorLoginBackGround"
 	>
 
     <TextView
@@ -31,8 +32,7 @@
 			android:layout_height="40dp"
 			android:layout_marginStart="20dp"
 			android:layout_marginEnd="20dp"
-			android:background="@null"
-			app:layout_constraintVertical_chainStyle="spread"
+			android:background="@drawable/bg_edit_text_login"
 			android:hint="User Name"
 			android:padding="5dp"
 			android:textColor="#000"
@@ -40,11 +40,11 @@
 			/>
         <EditText
 			android:layout_width="match_parent"
-			android:layout_height="30dp"
+			android:layout_height="40dp"
 			android:layout_marginTop="20dp"
 			android:layout_marginStart="20dp"
 			android:layout_marginEnd="20dp"
-			android:background="@null"
+			android:background="@drawable/bg_edit_text_login"
 			android:hint="Password"
 			android:padding="5dp"
 			android:id="@+id/edtPassword"
@@ -55,7 +55,7 @@
         <Button
 			android:layout_width="100dp"
 			android:layout_height="50dp"
-			android:background="@color/colorAccent"
+			android:background="@drawable/bg_btn_login"
 			android:id="@+id/btnLogin"
 			android:layout_marginTop="20dp"
 			android:text="LOGIN"

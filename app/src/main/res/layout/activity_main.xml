@@ -15,8 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/mainTabs"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnLogout"
         android:id="@+id/mainViewPager"
+        />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_btn_login"
+        android:id="@+id/btnLogout"
+        android:text="Log out"
         />
 
 </android.support.constraint.ConstraintLayout>

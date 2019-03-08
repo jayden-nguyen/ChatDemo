@@ -11,6 +11,5 @@ class MainContract {
     }
 
     interface BaseView {
-        fun renderLoginResult(item: LoginResponseItem?)
     }
 }
