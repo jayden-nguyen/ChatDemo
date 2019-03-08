@@ -10,6 +10,10 @@ import com.example.android.chatproject.util.KeyPreferences.USER_ID
 import com.example.android.chatproject.util.KeyPreferences.USER_NAME
 
 class PreferencesUtil(private val context: Context) {
+    fun clear() {
+        mPref.edit().clear().apply()
+    }
+
     private var mPref = context.getSharedPreferences(context.getString(R.string.preference_name),Context.MODE_PRIVATE)
 
     var userId: Int

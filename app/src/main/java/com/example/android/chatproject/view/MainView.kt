@@ -8,6 +8,6 @@ import com.example.android.chatproject.model.response.UserProfileItem
 interface MainView: MainContract.BaseView{
     fun renderUserList(userList: ArrayList<UserProfileItem>?)
     fun renderRoomList(roomList: ArrayList<RoomData>?)
-    fun renderCreateRoom(createRoomData: CreateRoomData?)
+    fun renderCreateRoom(createRoomData: CreateRoomData?, name: String)
     fun renderRefreshToken(accessToken: String?)
 }

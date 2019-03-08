@@ -39,12 +39,12 @@ class MainPresenter(context: Context): ParentPresenter<MainView>() {
             })
     }
 
-    fun createRoom(createRoomRequest: CreateRoomRequest) {
+    fun createRoom(createRoomRequest: CreateRoomRequest, partnerName: String) {
         mDataManager.createRoom(createRoomRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                getView()?.renderCreateRoom(it.responseData?.room)
+                getView()?.renderCreateRoom(it.responseData?.room, partnerName)
             },{
                 Log.d(TAG, "Onrror ${it.message}")
             })

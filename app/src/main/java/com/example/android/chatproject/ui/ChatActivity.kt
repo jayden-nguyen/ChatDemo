@@ -11,6 +11,7 @@ import com.example.android.chatproject.R
 import com.example.android.chatproject.model.Message
 import com.example.android.chatproject.util.RoomKey.ROOM_ID
 import com.example.android.chatproject.util.RoomKey.ROOM_NAME
+import com.example.android.chatproject.util.RoomKey.ROOM_PARTNER_NAME
 import com.example.android.chatproject.util.RoomKey.ROOM_USER_LIST
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -40,7 +41,7 @@ class ChatActivity: AppCompatActivity() {
             if (i != mPref.userId)
                 friendId = i
         }
-        val friendName = intent.getStringExtra(ROOM_NAME)
+        val friendName = intent.getStringExtra(ROOM_PARTNER_NAME)
         setupStompClient()
 
         imgBack.setOnClickListener {

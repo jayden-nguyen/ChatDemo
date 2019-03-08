@@ -48,6 +48,7 @@ class LoginActivity: AppCompatActivity() , LoginView{
         mPref.userId = item?.user!!.userId
         mPref.userName = item?.user!!.userName
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
     override fun onDestroy() {

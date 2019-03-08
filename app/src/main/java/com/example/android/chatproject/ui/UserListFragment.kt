@@ -19,6 +19,7 @@ import com.example.android.chatproject.presenter.MainPresenter
 import com.example.android.chatproject.util.PreferencesUtil
 import com.example.android.chatproject.util.RoomKey.ROOM_ID
 import com.example.android.chatproject.util.RoomKey.ROOM_NAME
+import com.example.android.chatproject.util.RoomKey.ROOM_PARTNER_NAME
 import com.example.android.chatproject.util.RoomKey.ROOM_USER_LIST
 import com.example.android.chatproject.view.MainView
 import kotlinx.android.synthetic.main.fragment_user_list.*
@@ -37,13 +38,14 @@ class UserListFragment: Fragment() , MainView{
 
     }
 
-    override fun renderCreateRoom(createRoomData: CreateRoomData?) {
+    override fun renderCreateRoom(createRoomData: CreateRoomData?, partnerName: String) {
         val id = createRoomData?.id
         val userIds = createRoomData?.userIds
         val name = createRoomData?.name
         startActivity(Intent(context, ChatActivity::class.java).apply {
             putExtra(ROOM_ID, id)
             putExtra(ROOM_USER_LIST, userIds)
+            putExtra(ROOM_PARTNER_NAME, partnerName)
         })
     }
 
@@ -83,7 +85,7 @@ class UserListFragment: Fragment() , MainView{
     }
 
     private fun onClicked(userIds: List<Int>, name: String) {
-        mPresenter?.createRoom(CreateRoomRequest(userIds, name))
+        mPresenter?.createRoom(CreateRoomRequest(userIds, name), name)
     }
 
     override fun onDestroy() {

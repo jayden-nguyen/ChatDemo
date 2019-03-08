@@ -66,7 +66,7 @@ class RoomListFragment: Fragment(), MainView {
         }
     }
 
-    override fun renderCreateRoom(createRoomData: CreateRoomData?) {
+    override fun renderCreateRoom(createRoomData: CreateRoomData?, partnerName: String) {
         val id = createRoomData?.id
         val userIds = createRoomData?.userIds
         val name = createRoomData?.name
@@ -87,7 +87,7 @@ class RoomListFragment: Fragment(), MainView {
     }
 
     fun onItemClicked(userIds: List<Int>, name: String) {
-        mPresenter?.createRoom(CreateRoomRequest(userIds, name))
+        mPresenter?.createRoom(CreateRoomRequest(userIds, name), name)
     }
 
     companion object {

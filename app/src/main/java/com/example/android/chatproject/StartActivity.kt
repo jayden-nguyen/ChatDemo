@@ -21,9 +21,13 @@ class StartActivity: AppCompatActivity() {
         Toast.makeText(this, "AccessToken: ${mPref.accessToken}", Toast.LENGTH_SHORT).show()
 
         if (mPref.accessToken == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
         } else {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
         }
     }
 }

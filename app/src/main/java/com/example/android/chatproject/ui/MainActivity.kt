@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.android.chatproject.util.PreferencesUtil
 import com.example.android.chatproject.R
+import com.example.android.chatproject.StartActivity
 import com.example.android.chatproject.model.response.CreateRoomData
 import com.example.android.chatproject.model.response.RoomData
 import com.example.android.chatproject.model.response.UserProfileItem
@@ -28,6 +29,12 @@ class MainActivity : AppCompatActivity() , MainView{
             mPresenter?.setView(this)
         }
         checkExpiredTime()
+        btnLogout.setOnClickListener {
+            mPref.clear()
+            startActivity(Intent(this, StartActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
+        }
     }
 
     private fun checkExpiredTime() {
@@ -54,7 +61,7 @@ class MainActivity : AppCompatActivity() , MainView{
 
     }
 
-    override fun renderCreateRoom(createRoomData: CreateRoomData?) {
+    override fun renderCreateRoom(createRoomData: CreateRoomData?, partnerName: String) {
 
     }
 
